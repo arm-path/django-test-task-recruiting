@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from .models import Recruit, Test, Planet, Sith
+from .tasks import send_email_enrolled, send_email_excluded
 
 
 class ValidationTest:
@@ -95,7 +96,7 @@ class DetailMixin:
                 sith.recruits.add(recruit)
                 recruit.enrolled = True
                 recruit.save()
-                #  TODO: Отправить электронное письмо в указанный адрес, использовать Celery
+                send_email_enrolled.delay(recruit.email, sith.name)  # --> Celery Send mail
                 messages.success(request, f'Рекрут " {recruit.name}"  успешно зачислен в орден Рук Тени!')
                 return HttpResponseRedirect(reverse('sith_page', kwargs={'sith_id': kwargs.get('sith_id')}))
             else:
@@ -113,6 +114,6 @@ class DetailMixin:
             sith.recruits.remove(recruit)
             recruit.enrolled = False
             recruit.save()
-            #  TODO: Отправить электронное письмо в указанный адрес, использовать Celery
+            send_email_excluded.delay(recruit.email, sith.name)  # --> Celery Send mail
             messages.success(request, f'Рекрут " {recruit.name}"  успешно исключен из ордена Рук Тени!')
             return HttpResponseRedirect(reverse('sith_page', kwargs={'sith_id': kwargs.get('sith_id')}))
