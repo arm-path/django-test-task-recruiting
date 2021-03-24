@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<div class="form-container ">
+    <div class="dropstart">
+        <a class="btn btn-secondary mt-3 dropdown-toggle link-stand" href="{% url 'sith' %}"> Назад </a>
+        <div class="card-header mt-3">Список ситхов</div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col"> Количество "Рук тени"</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in siths %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ obj.name }}</td>
+                    <td>{{ obj.cnt }}</td>
+                </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

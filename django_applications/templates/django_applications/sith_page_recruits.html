@@ -1,0 +1,40 @@
+{% extends 'django_applications/sith_page_base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content_page_sith %}
+<div class="card-header">
+    <h3 style="text-align: center">{{ page }} <span class="badge  bg-success">{{ recruits | length }}</span></h3>
+</div>
+<form action="" method="GET" class="d-flex m-3">
+    <input name="search" class="form-control me-2" type="search" placeholder="Поиск по имени рекрута">
+    <button class="btn btn-outline-success" type="submit">Найти</button>
+</form>
+<div class="card-body">
+    <div style="text-align: center">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Email</th>
+                <th scope="col">Планета</th>
+                <th scope="col"> Подробно</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in recruits %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ obj.name }}</td>
+                <td>{{ obj.email }}</td>
+                <td>{{ obj.planet }}</td>
+                <td><a href="{% url 'sith_page_recruit' sith_id=sith.id recruit_id=obj.id %}"
+                       class="recruit-link link-stand">Смотреть | Принять</a></td>
+            </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

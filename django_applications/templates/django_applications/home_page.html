@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="message" style="text-align: center" class=" hide alert alert-success">
+</div>
+<div class="home-page-container">
+    <a href="{% url 'sith' %}" class="home-page-sith link-stand"> Для Ситхов </a>
+    <a href="{% url 'recruit' %}" class="home-page-recruit link-stand"> Для рекрутов </a>
+</div>
+<script src="{% static 'django_applications/js/home_page.js'%}"></script>
+{% endblock %}

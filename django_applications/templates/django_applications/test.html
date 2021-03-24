@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="form-container">
+    <div class="card">
+        <div class="card-header">
+            <h3 style="text-align: center"> Тестовое задание для Руки тени №{{ object.orden_code }}</h3>
+        </div>
+        <form class="card-body" action="" method="POST">
+            {% csrf_token %}
+            <p class="card-text">
+                {% for obj in object.question.all %}
+            <div class="alert alert-primary js-questions" role="alert">
+                <span class="js-question">{{ obj }}</span>
+                &nbsp;&nbsp;&nbsp; <input class="form-check-input js-answer" type="checkbox">
+                <span style="display: none" class="js-question-id">{{ obj.pk }}</span>
+            </div>
+            {% endfor %}
+            <span style="display: none" id="js-test-id">{{ object.orden_code }}</span>
+            </p>
+            <div class="d-grid gap-2">
+                <button id="js-send" class="btn btn-dark mt-3" type="submit"> Отправить заявку</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="{% static 'django_applications/js/test.js'%}"></script>
+{% endblock %}

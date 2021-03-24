@@ -1,0 +1,41 @@
+{% extends 'django_applications/sith_page_base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content_page_sith %}
+<div class="card-header"><h3 style="text-align: center">{{ page }}</h3></div>
+<div class="card-body">
+    <div><span class="badge bg-danger">Имя</span> : {{ recruits.name }}</div>
+    <div><span class="badge bg-danger">Возраст</span> : {{ recruits.age }}</div>
+    <div><span class="badge bg-danger">Электронная почта</span> : {{ recruits.email }}</div>
+    <div><span class="badge bg-danger">Планета</span> : {{ recruits.planet }}</div>
+    {% if recruits.trials %}
+    <h4 class="m-4">Результаты тестового испытания:</h4>
+    <div>
+        {% for obj in recruits.trials %}
+        {% if obj.answer == obj.correct_answer %}
+        <div class="alert alert-success">
+            <b>Вопрос:</b> {{ obj.question }} &nbsp; &nbsp; <b>Ответ:</b> {{obj.answer}} &nbsp; &nbsp;
+            <b>Правильный ответ: </b>{{ obj.correct_answer }} &nbsp; &nbsp;
+        </div>
+        {% else %}
+        <div class="alert alert-danger">
+            <b>Вопрос:</b> {{ obj.question }} &nbsp; &nbsp; <b>Ответ:</b> {{obj.answer}} &nbsp; &nbsp;
+            <b>Правильный ответ: </b>{{ obj.correct_answer }} &nbsp; &nbsp;
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-danger m-4"> Тестовое задание не решено, либо отсутствует!</div>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% block send_request_post_recruit %}
+        <div class="d-grid gap-2">
+            <button class="btn btn-dark mt-3" type="submit">Зачислить</button>
+        </div>
+        {% endblock  %}
+    </form>
+</div>
+{% endblock %}

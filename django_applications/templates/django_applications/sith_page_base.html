@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3 dropstart">
+            <a href="{% url 'home_page' %}" class="btn btn-secondary mt-3 dropdown-toggle">
+                Главная страница
+            </a>
+            <div class="list-group mb-3 mt-3">
+                <h5 class="list-group-item list-group-item-dark mb-0">
+                    Планеты <span class="badge bg-dark">{{ planets | length }}</span>
+                </h5>
+                <a href="{% url 'sith_page' sith_id=sith.id %}" class="list-group-item list-group-item-secondary">
+                    Все
+                </a>
+                {% for obj in planets %}
+                <a href="{% url 'sith_page_planet' sith_id=sith.id planet_id=obj.id %}"
+                   class="list-group-item list-group-item-secondary">
+                    {{ obj }} <span class="badge bg-danger">{{ obj.cnt }}</span>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="list-group mb-3 mt-3">
+                <h5 class="list-group-item list-group-item-dark mb-0">
+                    Мои рекруты <span class="badge  bg-dark">{{ sith.recruits.all | length }}</span>
+                </h5>
+                {% for obj in sith.recruits.all %}
+                <a href="{% url 'sith_page_my_recruit' sith_id=sith.id my_recruit_id=obj.id %}"
+                   class="list-group-item list-group-item-action list-group-item-secondary"> {{ obj }} </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9 mt-3">
+            {% include 'django_applications/include/messages.html' %}
+            <div class="card"> {% block content_page_sith %} {% endblock %}</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

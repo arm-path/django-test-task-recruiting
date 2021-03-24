@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<div class="form-container dropstart">
+    <a class="btn btn-secondary mt-3 dropdown-toggle link-stand" href="{% url 'home_page' %}"> Назад </a>
+    <h3 style="text-align: center"> Выбрать Ситха </h3>
+    <form action="" method="POST" class="d-grid gap-2">
+        {% csrf_token %}
+        {{ form }}
+        <button class="btn btn-dark mt-3" type="submit">Далее</button>
+    </form>
+    <div style="text-align: center">
+        <a class="link-stand" href="{% url 'siths' %}">Список ситхов</a>
+    </div>
+</div>
+{% endblock %}

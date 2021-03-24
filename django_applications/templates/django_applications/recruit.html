@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<form class="form-container dropstart" action="" method="POST">
+    <a class="btn btn-secondary mt-3 dropdown-toggle link-stand" href="{% url 'home_page' %}"> Назад </a>
+    <h3 style="text-align: center"> Создать кондидата рекрута </h3>
+    {% csrf_token %}
+    {{form}}
+    <div class="d-grid gap-2">
+        <button class="btn btn-dark mt-3" type="submit">Далее</button>
+    </div>
+</form>
+{% endblock %}

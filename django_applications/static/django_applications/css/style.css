@@ -1,0 +1,69 @@
+* {
+    box-sizing: border-box;
+}
+
+.link-stand {
+    text-decoration: none;
+    color: #000000;
+}
+
+.link-stand:hover {
+    color: #5a5a5a;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.errorlist {
+    color: #810c0c;
+}
+
+.home-page-container,
+.sith_page_recruits-container {
+    display: flex;
+
+    width: 70%;
+    min-height: 30%;
+    margin: 5% auto;
+}
+
+.home-page-recruit,
+.home-page-sith {
+    flex-basis: 50%;
+
+    padding: 15px;
+
+    text-align: center;
+    background-color: #c8c8c8;
+    border-radius: 15px;
+    border: 1px solid #f3f3f3;
+}
+
+.home-page-recruit:hover,
+.home-page-sith:hover {
+    cursor: pointer;
+    background-color: #e9e9e9;
+    border: 1px solid #5a5a5a;
+}
+
+.form-container {
+    width: 70%;
+    min-height: 30%;
+    margin: 5% auto;
+}
+
+.recruit-link {
+    margin-bottom: 25px;
+
+    color: #2d3642;
+    cursor: pointer;
+    font-size: 21px;
+    text-decoration: none;
+}
+
+
