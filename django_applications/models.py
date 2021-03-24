@@ -18,7 +18,7 @@ class Sith(models.Model):
     """ Модель Ситхов """
     name = models.CharField('Имя', max_length=255)
     planet = models.ForeignKey(Planet, on_delete=models.SET_NULL, null=True, verbose_name='Планета обучения')
-    recruits = models.ManyToManyField('Recruit', verbose_name='Рекркты', blank=True)
+    recruits = models.ManyToManyField('Recruit', verbose_name='Рекруты', blank=True)
 
     def __str__(self):
         return f'{self.name} | {self.planet}'
